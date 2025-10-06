@@ -1,75 +1,110 @@
 import 'package:flutter/material.dart';
 
 abstract class AppTextStyles {
-  static TextStyle style24W700Bold(BuildContext context) {
+  static TextStyle style34Bold(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 24),
+      fontSize: getResponsiveScaleFactor(context, fontSize: 34),
       fontWeight: FontWeight.w700,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
-  static TextStyle style16W600Bold(BuildContext context) {
+
+  static TextStyle style28SemiBold(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 16),
+      fontSize: getResponsiveScaleFactor(context, fontSize: 28),
       fontWeight: FontWeight.w600,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
-  static TextStyle style22W700Bold(BuildContext context) {
+  static TextStyle style25SemiBold(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 25),
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+      fontFamily: 'Inter',
+    );
+  }
+
+  static TextStyle style22Medium(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 22),
-      fontWeight: FontWeight.w700,
-      color: Colors.black,
-      fontFamily:  'Raleway',
-    );
-  }
-  static TextStyle style14W700Bold(BuildContext context) {
-    return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 14),
-      fontWeight: FontWeight.w700,
-      color: Colors.black,
-      fontFamily:  'Raleway',
-    );
-  } static TextStyle style14W500Medium(BuildContext context) {
-    return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 14),
       fontWeight: FontWeight.w500,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
-  static TextStyle style14W600SemiBold(BuildContext context) {
+
+  static TextStyle style17Medium(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 14),
-      fontWeight: FontWeight.w600,
+      fontSize: getResponsiveScaleFactor(context, fontSize: 17),
+      fontWeight: FontWeight.w500,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
-  static TextStyle style13W400(BuildContext context) {
+
+  static TextStyle style17Regular(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 17),
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
+      fontFamily: 'Inter',
+    );
+  }
+
+  static TextStyle style15Medium(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 15),
+      fontWeight: FontWeight.w500,
+      color: Colors.black,
+      fontFamily: 'Inter',
+    );
+  }
+
+  static TextStyle style15Regular(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 15),
+      fontWeight: FontWeight.w400,
+      color: Colors.black,
+      fontFamily: 'Inter',
+    );
+  }
+
+  static TextStyle style13Medium(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 13),
+      fontWeight: FontWeight.w500,
+      color: Colors.black,
+      fontFamily: 'Inter',
+    );
+  }
+
+  static TextStyle style13Regular(BuildContext context) {
     return TextStyle(
       fontSize: getResponsiveScaleFactor(context, fontSize: 13),
       fontWeight: FontWeight.w400,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
-  static TextStyle style12W500Bold(BuildContext context) {
+
+  static TextStyle style11Medium(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 12),
+      fontSize: getResponsiveScaleFactor(context, fontSize: 11),
       fontWeight: FontWeight.w500,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
-  static TextStyle style12W600SemiBold(BuildContext context) {
+
+  static TextStyle style11Regular(BuildContext context) {
     return TextStyle(
-      fontSize: getResponsiveScaleFactor(context, fontSize: 12),
-      fontWeight: FontWeight.w600,
+      fontSize: getResponsiveScaleFactor(context, fontSize: 11),
+      fontWeight: FontWeight.w400,
       color: Colors.black,
-      fontFamily:  'Raleway',
+      fontFamily: 'Inter',
     );
   }
 }

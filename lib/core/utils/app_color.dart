@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static const Color blackColor = Color(0xFF1E1E1E);
+  static const Color black20Color = Color(0xFF1D1E20);
   static const Color whiteColor = Color(0xFFFFFFFF);
-  static const Color backgroundColor = Color(0xFFDDE2FF);
-
-  static const Color purpleColor = Color(0xFF5436F8);
-  static const Color purpleColor2 = Color(0xFF6758FE);
-  static const Color greyColor = Color(0xFFA9A9A9);
-
-  static const Color darkGreyColor = Color(0xFF464061);
+  static const Color purpleColor = Color(0xFF9775FA);
+  static const Color orangeColor = Color(0xFFFF7043);
+  static const Color grey9EColor = Color(0xFF8F959E);
+  static const Color greyFAColor = Color(0xFFF5F6FA);
+  static const Color black2CColor = Color(0xFF1B262C);
+  static const Color black34Color = Color(0xFF222E34);
+  static const Color black3DColor = Color(0xFF29363D);
+  static const Color greyFBColor = Color(0xFFF5F8FB);
 }
