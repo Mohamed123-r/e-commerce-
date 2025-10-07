@@ -9,6 +9,7 @@ class Assets {
   static const String fontsInter18ptMedium = 'assets/fonts/Inter_18pt-Medium.ttf';
   static const String fontsInter18ptRegular = 'assets/fonts/Inter_18pt-Regular.ttf';
   static const String fontsInter18ptSemiBold = 'assets/fonts/Inter_18pt-SemiBold.ttf';
+  static const String imagesForgotPasswordImage = 'assets/images/forgot_password_image.png';
   static const String imagesLogo = 'assets/images/Logo.png';
   static const String imagesStartBackground = 'assets/images/start_background.png';
 

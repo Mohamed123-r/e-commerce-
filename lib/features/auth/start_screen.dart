@@ -1,10 +1,18 @@
 import 'package:e_commerce/core/utils/app_color.dart';
 import 'package:e_commerce/core/utils/app_text_style.dart';
+import 'package:e_commerce/features/auth/signUp/presentation/screen/sign_up.dart';
+
 import 'package:e_commerce/generated/assets.dart';
 import 'package:flutter/material.dart';
 
+import 'logIn/presentation/screen/logIn_screen.dart';
+
+
+
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
+
+  static const String routeName = '/start';
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +65,10 @@ class StartScreen extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            // Navigate to the next screen
+                            Navigator.pushNamed(
+                              context,
+                              SignUpScreen.routeName,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.greyFAColor,
@@ -76,7 +87,7 @@ class StartScreen extends StatelessWidget {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            // Navigate to the next screen
+                            Navigator.pushNamed(context, LoginScreen.routeName);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.purpleColor,
