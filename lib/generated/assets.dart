@@ -9,8 +9,17 @@ class Assets {
   static const String fontsInter18ptMedium = 'assets/fonts/Inter_18pt-Medium.ttf';
   static const String fontsInter18ptRegular = 'assets/fonts/Inter_18pt-Regular.ttf';
   static const String fontsInter18ptSemiBold = 'assets/fonts/Inter_18pt-SemiBold.ttf';
+  static const String imagesBag = 'assets/images/bag.svg';
   static const String imagesForgotPasswordImage = 'assets/images/forgot_password_image.png';
+  static const String imagesHeart = 'assets/images/heart.svg';
+  static const String imagesHome = 'assets/images/home.svg';
   static const String imagesLogo = 'assets/images/Logo.png';
+  static const String imagesMenu = 'assets/images/menu.svg';
+  static const String imagesSearch = 'assets/images/Search.svg';
   static const String imagesStartBackground = 'assets/images/start_background.png';
+  static const String imagesTest1 = 'assets/images/test1.png';
+  static const String imagesTest2 = 'assets/images/test2.png';
+  static const String imagesVoice = 'assets/images/Voice.svg';
+  static const String imagesWallet = 'assets/images/wallet.svg';
 
 }

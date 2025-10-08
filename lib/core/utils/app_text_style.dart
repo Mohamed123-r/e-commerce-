@@ -35,6 +35,14 @@ abstract class AppTextStyles {
       fontFamily: 'Inter',
     );
   }
+  static TextStyle style22SemiBold(BuildContext context) {
+    return TextStyle(
+      fontSize: getResponsiveScaleFactor(context, fontSize: 22),
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+      fontFamily: 'Inter',
+    );
+  }
 
   static TextStyle style17Medium(BuildContext context) {
     return TextStyle(

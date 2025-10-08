@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'core/helper_functions/on_generate_route.dart';
+import 'features/home/presentation/screen/home_screen.dart';
 import 'features/splash/persentation/screen/splash_screen.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Color(0xFFFEFEFE)),
-      initialRoute: SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       onGenerateRoute: onGenerateRoute,
     );
   }
