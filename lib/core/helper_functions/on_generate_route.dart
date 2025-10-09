@@ -1,7 +1,10 @@
 import 'package:e_commerce/features/auth/forgotPassword/presentation/screen/new_password_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/forgotPassword/presentation/screen/forgot_password_screen.dart';
 import '../../features/auth/forgotPassword/presentation/screen/verification_code_screen.dart';
+import '../../features/auth/logIn/domain/repo/login_repo.dart';
+import '../../features/auth/logIn/presentation/cubits/login_cubit.dart';
 import '../../features/auth/logIn/presentation/screen/logIn_screen.dart';
 import '../../features/auth/signUp/presentation/screen/sign_up.dart';
 
@@ -9,6 +12,7 @@ import '../../features/auth/start_screen.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 import '../../features/home/presentation/screen/product_detail_screen.dart';
 import '../../features/splash/persentation/screen/splash_screen.dart';
+import 'get_it.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -17,7 +21,15 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case StartScreen.routeName:
       return MaterialPageRoute(builder: (_) => StartScreen());
     case LoginScreen.routeName:
-      return MaterialPageRoute(builder: (_) => LoginScreen());
+      return MaterialPageRoute(
+        builder:
+            (_) => BlocProvider(
+          create:
+              (context) => LoginCubit(loginRepo: getIt.get<LoginRepo>()),
+
+          child: LoginScreen(),
+        ),
+      );
     case SignUpScreen.routeName:
       return MaterialPageRoute(builder: (_) => SignUpScreen());
     case VerificationCodeScreen.routeName:

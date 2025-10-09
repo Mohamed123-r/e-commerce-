@@ -9,10 +9,12 @@ class CustomButtonBottomNavigation extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final String title;
   final VoidCallback onPressed;
+ final  bool isLoading ;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,15 @@ class CustomButtonBottomNavigation extends StatelessWidget {
       height: 75,
       color: AppColors.purpleColor,
       onPressed: onPressed,
-      child: Text(
+      child:
+      isLoading
+          ? const CircularProgressIndicator(
+              color: AppColors.whiteColor,
+            )
+          :
+
+
+      Text(
         title,
         style: AppTextStyles.style17Medium(
           context,
