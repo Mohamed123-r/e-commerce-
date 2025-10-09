@@ -29,9 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
 
   bool _obscurePassword = true;
-
 
   @override
   void dispose() {
@@ -43,42 +43,47 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state)async {
+      listener: (context, state) async {
         if (state is LoginSuccess) {
           await customSuccess(context, massage: "Login Successful");
-          CacheHelper.sharedPreferences.setBool(isSuccessLogin, true);
-          Navigator.pushReplacementNamed(
-            context,
-            HomeScreen.routeName,
-          );
-        } else if (state is LoginFailure) {
-
-          customError(
-            context,
-           massage: state.message,
-          );
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          CacheHelper.sharedPreferences.setString(kToken, state.accessToken);
+          CacheHelper.sharedPreferences.setBool(kIsLogin, true);
+        }
+        if (state is LoginFailure) {
+          customError(context, massage: state.message);
         }
       },
       builder: (context, state) {
         return Form(
           key: _formKey,
+          autovalidateMode: autovalidateMode,
           child: Scaffold(
             bottomNavigationBar: CustomButtonBottomNavigation(
               title: 'Login',
-              isLoading: state is LoginLoading,
+              isLoading: context.watch<LoginCubit>().state is LoginLoading
+                  ? true
+                  : false,
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (_formKey.currentState != null &&
+                    _formKey.currentState!.validate()) {
                   context.read<LoginCubit>().login(
                     email: _emailController.text,
                     password: _passwordController.text,
                   );
+                } else {
+                  setState(() {
+                    autovalidateMode = AutovalidateMode.always;
+                  });
                 }
               },
             ),
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 8),
+                  horizontal: 16.0,
+                  vertical: 8,
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -95,8 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    Text('Welcome',
-                        style: AppTextStyles.style28SemiBold(context)),
+                    Text(
+                      'Welcome',
+                      style: AppTextStyles.style28SemiBold(context),
+                    ),
                     const SizedBox(height: 4),
                     Text(
                       'Please enter your data to continue',
@@ -110,9 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       title: 'Email',
                       hint: 'Example@gmail.com',
                       keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        validateEmail(value);
-                      },
+                      validator: (value) => validateEmail(context, value),
                       onChanged: (value) {
                         if (_formKey.currentState != null) {
                           _formKey.currentState!.validate();
@@ -138,9 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         },
                       ),
-                      validator: (value) {
-                        validatePassword(value);
-                      },
+                      validator: (value) => validatePassword(context, value),
                       onChanged: (value) {
                         if (_formKey.currentState != null) {
                           _formKey.currentState!.validate();
@@ -191,11 +194,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           style: TextStyle(
-                              fontSize: 12, color: Colors.grey[600]),
+                            fontSize: 12,
+                            color: Colors.grey[600],
+                          ),
                           children: const [
                             TextSpan(
                               text:
-                              'By connecting your account confirm that you agree\nwith our ',
+                                  'By connecting your account confirm that you agree\nwith our ',
                             ),
                             TextSpan(
                               text: 'Term and Condition',

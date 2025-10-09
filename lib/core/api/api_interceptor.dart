@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 import '../database/cache/cache_helper.dart';
@@ -9,9 +8,10 @@ class ApiInterceptor extends Interceptor {
     super.onRequest(options, handler);
     options.headers['token'] = null;
     options.headers['lang'] = 'en';
-    options.headers['Authorization'] ="";
-        // CacheHelper().getMap(key: userData) == null
-        //     ? "Bearer "
-        //     : 'Bearer ${CacheHelper().getMap(key: userData)!['token']}';
+    options.headers['Authorization'] = "";
+    CacheHelper().getDataString(key: 'kToken') != null
+        ? options.headers['Authorization'] =
+              'Bearer ${CacheHelper().getDataString(key: 'kToken')}'
+        : null;
   }
 }

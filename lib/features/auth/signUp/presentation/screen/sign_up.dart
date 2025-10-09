@@ -98,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                   validator: (value) {
-                    return validatePassword(value);
+                    return validatePassword(context, value);
                   },
                 ),
                 const SizedBox(height: 24),
@@ -109,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   keyboardType: TextInputType.emailAddress,
                   suffixIcon: const Icon(Icons.check, color: Colors.green),
                   validator: (value) {
-                    return validateEmail(value);
+                    return validateEmail(context, value);
                   },
                 ),
                 const SizedBox(height: 24),

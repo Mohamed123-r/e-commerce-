@@ -1,7 +1,10 @@
 import 'package:e_commerce/core/utils/app_color.dart';
 import 'package:e_commerce/generated/assets.dart';
 import 'package:flutter/material.dart';
+import '../../../../constant.dart';
+import '../../../../core/database/cache/cache_helper.dart';
 import '../../../auth/start_screen.dart';
+import '../../../home/presentation/screen/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,7 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, StartScreen.routeName);
+      Navigator.pushReplacementNamed(
+        context,
+        CacheHelper.sharedPreferences.getBool(kIsLogin) == true
+            ? HomeScreen.routeName
+            : StartScreen.routeName,
+      );
     });
   }
 

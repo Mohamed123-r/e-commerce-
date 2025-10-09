@@ -73,7 +73,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     },
                   ),
                   validator: (value) {
-                    return validatePassword(value);
+                    return validatePassword(context, value);
                   },
                 ),
                 const SizedBox(height: 24),
