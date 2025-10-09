@@ -1,3 +1,5 @@
+import 'package:e_commerce/features/auth/forgotPassword/domain/repo/forgot_repo.dart';
+import 'package:e_commerce/features/auth/forgotPassword/presentation/cubits/forgot_cubit.dart';
 import 'package:e_commerce/features/auth/forgotPassword/presentation/screen/new_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +24,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => StartScreen());
     case LoginScreen.routeName:
       return MaterialPageRoute(
-        builder:
-            (_) => BlocProvider(
-          create:
-              (context) => LoginCubit(loginRepo: getIt.get<LoginRepo>()),
+        builder: (_) => BlocProvider(
+          create: (context) => LoginCubit(loginRepo: getIt.get<LoginRepo>()),
 
           child: LoginScreen(),
         ),
@@ -33,11 +33,45 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case SignUpScreen.routeName:
       return MaterialPageRoute(builder: (_) => SignUpScreen());
     case VerificationCodeScreen.routeName:
-      return MaterialPageRoute(builder: (_) => VerificationCodeScreen());
+
+
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+
+          create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
+
+          child: VerificationCodeScreen(
+            email: settings.arguments as String,
+          ),
+        ),
+      );
+
     case ForgotPasswordScreen.routeName:
-      return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
+
+          child: ForgotPasswordScreen(),
+        ),
+      );
+
     case NewPasswordScreen.routeName:
-      return MaterialPageRoute(builder: (_) => NewPasswordScreen());
+       List arguments = settings.arguments as List;
+      return MaterialPageRoute(
+
+
+        builder: (_) => BlocProvider(
+          create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
+
+          child: NewPasswordScreen(
+
+             email:arguments[0] as String,
+            otp: arguments[1] as String,
+
+          ),
+        ),
+      );
+
     case HomeScreen.routeName:
       return MaterialPageRoute(builder: (_) => HomeScreen());
     case ProductDetailScreen.routeName:

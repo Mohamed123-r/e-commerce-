@@ -9,7 +9,7 @@ import '../../domain/repo/login_repo.dart';
 import '../models/Login_model.dart';
 
 class LoginRepoImpl implements LoginRepo {
-  final ApiSources apiSources;
+  final ApiSourcesLogin apiSources;
   final Logger logger = Logger();
 
   LoginRepoImpl({required this.apiSources});

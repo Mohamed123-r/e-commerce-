@@ -1,10 +1,10 @@
 import 'package:e_commerce/core/api/dio_consumer.dart';
 import 'package:e_commerce/core/api/end_point.dart';
 
-class ApiSources {
+class ApiSourcesLogin {
   DioConsumer dioConsumer;
 
-  ApiSources({required this.dioConsumer});
+  ApiSourcesLogin({required this.dioConsumer});
 
   login({required String email, required String password}) async {
     try {
