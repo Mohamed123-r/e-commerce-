@@ -1,6 +1,7 @@
 import 'package:e_commerce/features/auth/forgotPassword/domain/repo/forgot_repo.dart';
 import 'package:e_commerce/features/auth/forgotPassword/presentation/cubits/forgot_cubit.dart';
 import 'package:e_commerce/features/auth/forgotPassword/presentation/screen/new_password_screen.dart';
+import 'package:e_commerce/features/auth/signUp/presentation/cubits/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/forgotPassword/presentation/screen/forgot_password_screen.dart';
@@ -8,8 +9,10 @@ import '../../features/auth/forgotPassword/presentation/screen/verification_code
 import '../../features/auth/logIn/domain/repo/login_repo.dart';
 import '../../features/auth/logIn/presentation/cubits/login_cubit.dart';
 import '../../features/auth/logIn/presentation/screen/logIn_screen.dart';
+import '../../features/auth/signUp/domain/repo/sign_up_repo.dart';
 import '../../features/auth/signUp/presentation/screen/sign_up.dart';
 
+import '../../features/auth/signUp/presentation/screen/verification_code_from_sign_upscreen.dart';
 import '../../features/auth/start_screen.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 import '../../features/home/presentation/screen/product_detail_screen.dart';
@@ -31,7 +34,13 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         ),
       );
     case SignUpScreen.routeName:
-      return MaterialPageRoute(builder: (_) => SignUpScreen());
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (context) => SignUpCubit(signUpRepo: getIt.get<SignUpRepo>()),
+
+          child: SignUpScreen(),
+        ),
+      );
     case VerificationCodeScreen.routeName:
 
 
@@ -45,7 +54,19 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           ),
         ),
       );
+    case VerificationCodeSignUpScreen.routeName:
 
+
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+
+          create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
+
+          child: VerificationCodeSignUpScreen(
+            email: settings.arguments as String,
+          ),
+        ),
+      );
     case ForgotPasswordScreen.routeName:
       return MaterialPageRoute(
         builder: (_) => BlocProvider(

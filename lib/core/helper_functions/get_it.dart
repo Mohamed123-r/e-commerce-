@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/features/auth/forgotPassword/data/api_sources/api_sources.dart';
 import 'package:e_commerce/features/auth/forgotPassword/domain/repo/forgot_repo.dart';
+import 'package:e_commerce/features/auth/signUp/data/api_sources/api_sources_sign_up.dart';
+import 'package:e_commerce/features/auth/signUp/data/repo_impl/sign_up_repo_impl.dart';
+import 'package:e_commerce/features/auth/signUp/domain/repo/sign_up_repo.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/auth/forgotPassword/data/repo_impl/forgot_repo_impl.dart';
@@ -16,11 +19,17 @@ void setupGetIt() {
   getIt.registerLazySingleton<ApiSourcesLogin>(
     () => ApiSourcesLogin(dioConsumer: getIt.get<DioConsumer>()),
   );
+  getIt.registerLazySingleton<ApiSourcesSignUp>(
+    () => ApiSourcesSignUp(dioConsumer: getIt.get<DioConsumer>()),
+  );
   getIt.registerLazySingleton<ApiSourcesForgot>(
     () => ApiSourcesForgot(dioConsumer: getIt.get<DioConsumer>()),
   );
   getIt.registerLazySingleton<LoginRepo>(
     () => LoginRepoImpl(apiSources: getIt.get<ApiSourcesLogin>()),
+  );
+  getIt.registerLazySingleton<SignUpRepo>(
+    () => SignUpRepoImpl(apiSources: getIt.get<ApiSourcesSignUp>()),
   );
   getIt.registerLazySingleton<ForgotRepo>(
     () => ForgotRepoImpl(apiSources: getIt.get<ApiSourcesForgot>()),
