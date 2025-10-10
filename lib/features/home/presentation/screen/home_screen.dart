@@ -286,6 +286,9 @@ class ProductBlocBuild extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         ProductDetailScreen.routeName,
+                        arguments: state is ProductSuccess
+                            ? state.products[index]
+                            : null,
                       );
                     },
                     child: ProductItem(

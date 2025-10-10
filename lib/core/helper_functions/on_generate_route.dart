@@ -2,6 +2,7 @@ import 'package:e_commerce/features/auth/forgotPassword/domain/repo/forgot_repo.
 import 'package:e_commerce/features/auth/forgotPassword/presentation/cubits/forgot_cubit.dart';
 import 'package:e_commerce/features/auth/forgotPassword/presentation/screen/new_password_screen.dart';
 import 'package:e_commerce/features/auth/signUp/presentation/cubits/sign_up_cubit.dart';
+import 'package:e_commerce/features/home/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/forgotPassword/presentation/screen/forgot_password_screen.dart';
@@ -102,7 +103,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         ),
       );
     case ProductDetailScreen.routeName:
-      return MaterialPageRoute(builder: (_) => ProductDetailScreen());
+      return MaterialPageRoute(
+        builder: (_) =>
+            ProductDetailScreen(product: settings.arguments as ProductEntity),
+      );
 
     default:
       return MaterialPageRoute(builder: (_) => Container());

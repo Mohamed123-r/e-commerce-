@@ -5,10 +5,13 @@ import 'package:e_commerce/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../domain/entities/product_entity.dart';
+
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
 
   static const String routeName = '/productDetail';
+  final ProductEntity product;
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -22,7 +25,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-
       appBar: AppBar(
         leading: Center(
           child: Padding(
@@ -39,7 +41,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
         ),
-
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
@@ -62,17 +63,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(
-              Assets.imagesTest1,
+            SizedBox(
               height: 500,
-              width: double.infinity,
-              fit: BoxFit.cover,
+              child: Image.network(
+                widget.product.imageUrl,
+                height: 500,
+                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 16),
             // Product Title and Price
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +86,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         children: [
                           Text(
-                            'Men\'s Printed Pullover Hoodie',
+                            'Name',
                             style: AppTextStyles.style13Regular(
                               context,
                             ).copyWith(color: AppColors.grey9EColor),
@@ -99,12 +105,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Nike Club Fleece',
-                            style: AppTextStyles.style22SemiBold(context),
+                          Expanded(
+                            child: Text(
+                              widget.product.name,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyles.style22SemiBold(context),
+                            ),
                           ),
                           Text(
-                            '\$120',
+                            '\$ ${widget.product.price}',
                             style: AppTextStyles.style22SemiBold(context),
                           ),
                         ],
@@ -112,61 +122,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ],
                   ),
                   const SizedBox(height: 12),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Size', style: AppTextStyles.style17Medium(context)),
-                      Text(
-                        'Size Guide',
-                        style: AppTextStyles.style15Regular(
-                          context,
-                        ).copyWith(color: AppColors.grey9EColor),
-                      ),
-                    ],
-                  ),
+                  Text('Size', style: AppTextStyles.style17Medium(context)),
                   const SizedBox(height: 12),
-
                   SizedBox(
                     height: 60,
-
-                    child: GestureDetector(
-                      onTap: () => setState(() {}),
-                      child: Row(
-                        spacing: 12,
-                        children: [
-                          Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: sizes.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () => setState(() => selectedSizeIndex = index),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 12),
                             child: SizeItem(
-                              selectedSizeIndex: false,
-                              sizes: sizes[0],
+                              isSelected: selectedSizeIndex == index,
+                              size: sizes[index],
                             ),
                           ),
-                          Expanded(
-                            child: SizeItem(
-                              selectedSizeIndex: true,
-                              sizes: sizes[1],
-                            ),
-                          ),
-                          Expanded(
-                            child: SizeItem(
-                              selectedSizeIndex: false,
-                              sizes: sizes[2],
-                            ),
-                          ),
-                          Expanded(
-                            child: SizeItem(
-                              selectedSizeIndex: false,
-                              sizes: sizes[3],
-                            ),
-                          ),
-                          Expanded(
-                            child: SizeItem(
-                              selectedSizeIndex: false,
-                              sizes: sizes[4],
-                            ),
-                          ),
-                        ],
-                      ),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -180,7 +154,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'The Nike Throwback Pullover Hoodie is made from Nike Throwback Terry fabric that blends performance feel with a cozy fleece.',
+                        widget.product.description,
                         style: AppTextStyles.style15Regular(
                           context,
                         ).copyWith(color: AppColors.grey9EColor),
@@ -188,7 +162,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ],
                   ),
                   const SizedBox(height: 16),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -207,67 +180,46 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
                   Column(
                     children: [
                       Row(
                         children: [
-                          CircleAvatar(
-                            radius: 20,
-                            backgroundImage: AssetImage(
-                              Assets.imagesTest2,
-                            ), // Assume image
-                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Ron Richards',
-                                      style: AppTextStyles.style15Medium(
-                                        context,
-                                      ),
-                                    ),
-                                    Text(
-                                      '13 Sep 2020',
-                                      style: AppTextStyles.style11Regular(
-                                        context,
-                                      ).copyWith(color: AppColors.grey9EColor),
-                                    ),
-                                  ],
+                                Text(
+                                  "Number of reviews:  ${widget.product.reviewsCount.toString()}",
+                                  style: AppTextStyles.style15Medium(context),
                                 ),
                                 Column(
                                   children: [
                                     Row(
                                       children: [
                                         Text(
-                                          '4.0',
+                                          widget.product.rating.toString(),
                                           style: AppTextStyles.style15Medium(
                                             context,
                                           ),
                                         ),
                                         const SizedBox(width: 4),
-
                                         Text(
                                           'rating',
                                           style:
-                                              AppTextStyles.style11Medium(
-                                                context,
-                                              ).copyWith(
-                                                color: AppColors.grey9EColor,
-                                              ),
+                                          AppTextStyles.style11Medium(
+                                            context,
+                                          ).copyWith(
+                                            color: AppColors.grey9EColor,
+                                          ),
                                         ),
                                       ],
                                     ),
                                     Row(
                                       children: List.generate(
                                         5,
-                                        (i) => Icon(
-                                          i < 4
+                                            (i) => Icon(
+                                          i < widget.product.rating.floor()
                                               ? Icons.star
                                               : Icons.star_border,
                                           size: 16,
@@ -282,19 +234,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget...',
-                        style: AppTextStyles.style15Regular(
-                          context,
-                        ).copyWith(color: AppColors.grey9EColor),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
-
                   Column(
                     children: [
                       Row(
@@ -316,7 +258,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ],
                           ),
                           Text(
-                            '\$125',
+                            '\$ ${widget.product.price}',
                             style: AppTextStyles.style17Medium(context),
                           ),
                         ],
@@ -341,29 +283,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 class SizeItem extends StatelessWidget {
   const SizeItem({
     super.key,
-    required this.selectedSizeIndex,
-    required this.sizes,
+    required this.isSelected,
+    required this.size,
   });
 
-  final bool selectedSizeIndex;
-  final String sizes;
+  final bool isSelected;
+  final String size;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 60,
-
       decoration: BoxDecoration(
-        color: selectedSizeIndex
+        color: isSelected
             ? AppColors.purpleColor
             : AppColors.greyFAColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
         child: Text(
-          sizes,
+          size,
           style: AppTextStyles.style17Medium(context).copyWith(
-            color: selectedSizeIndex ? Colors.white : AppColors.grey9EColor,
+            color: isSelected ? Colors.white : AppColors.grey9EColor,
           ),
         ),
       ),

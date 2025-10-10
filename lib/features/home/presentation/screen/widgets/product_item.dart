@@ -28,6 +28,9 @@ class ProductItem extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
                   child: Image.network(
                     product!.imageUrl,
+                    errorBuilder: (context, error, stackTrace) =>
+                        Center(child: Icon(Icons.error)),
+
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
