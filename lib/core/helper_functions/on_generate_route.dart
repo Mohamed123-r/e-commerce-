@@ -14,6 +14,10 @@ import '../../features/auth/signUp/presentation/screen/sign_up.dart';
 
 import '../../features/auth/signUp/presentation/screen/verification_code_from_sign_upscreen.dart';
 import '../../features/auth/start_screen.dart';
+import '../../features/home/domain/repo/category_repo.dart';
+import '../../features/home/domain/repo/product_repo.dart';
+import '../../features/home/presentation/cubits/category_cubit.dart';
+import '../../features/home/presentation/cubits/product_cubit.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 import '../../features/home/presentation/screen/product_detail_screen.dart';
 import '../../features/splash/persentation/screen/splash_screen.dart';
@@ -42,24 +46,16 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         ),
       );
     case VerificationCodeScreen.routeName:
-
-
       return MaterialPageRoute(
         builder: (_) => BlocProvider(
-
           create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
 
-          child: VerificationCodeScreen(
-            email: settings.arguments as String,
-          ),
+          child: VerificationCodeScreen(email: settings.arguments as String),
         ),
       );
     case VerificationCodeSignUpScreen.routeName:
-
-
       return MaterialPageRoute(
         builder: (_) => BlocProvider(
-
           create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
 
           child: VerificationCodeSignUpScreen(
@@ -77,24 +73,34 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
 
     case NewPasswordScreen.routeName:
-       List arguments = settings.arguments as List;
+      List arguments = settings.arguments as List;
       return MaterialPageRoute(
-
-
         builder: (_) => BlocProvider(
           create: (context) => ForgetPasswordCubit(getIt.get<ForgotRepo>()),
 
           child: NewPasswordScreen(
-
-             email:arguments[0] as String,
+            email: arguments[0] as String,
             otp: arguments[1] as String,
-
           ),
         ),
       );
 
     case HomeScreen.routeName:
-      return MaterialPageRoute(builder: (_) => HomeScreen());
+      return MaterialPageRoute(
+        builder: (_) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  ProductCubit(productRepo: getIt.get<ProductRepo>()),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  CategoryCubit(categoryRepo: getIt.get<CategoryRepo>()),
+            ),
+          ],
+          child: HomeScreen(),
+        ),
+      );
     case ProductDetailScreen.routeName:
       return MaterialPageRoute(builder: (_) => ProductDetailScreen());
 
