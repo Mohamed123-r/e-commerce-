@@ -27,7 +27,12 @@ class BrandItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
-              child: SvgPicture.network(category.imageUrl, fit: BoxFit.scaleDown),
+              child: SvgPicture.network(
+                category.imageUrl,
+
+                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+                fit: BoxFit.scaleDown,
+              ),
             ),
           ),
           const SizedBox(width: 8),

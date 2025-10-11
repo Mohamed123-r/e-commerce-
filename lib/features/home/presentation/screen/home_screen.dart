@@ -12,6 +12,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/widgets/bottom_nav_bar.dart';
 import '../cubits/category_cubit.dart';
+import 'category_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -112,7 +113,13 @@ class BrandBlocBuild extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     itemCount: state.category.length,
                     itemBuilder: (context, index) =>
-                        BrandItem(category: state.category[index]),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context,
+                                  CategoryScreen.routeName,
+                                  arguments: state.category[index]);
+                            },
+                            child: BrandItem(category: state.category[index])),
                     separatorBuilder: (context, index) =>
                         const SizedBox(width: 12),
                   ),

@@ -15,10 +15,12 @@ import '../../features/auth/signUp/presentation/screen/sign_up.dart';
 
 import '../../features/auth/signUp/presentation/screen/verification_code_from_sign_upscreen.dart';
 import '../../features/auth/start_screen.dart';
+import '../../features/home/domain/entities/category_entity.dart';
 import '../../features/home/domain/repo/category_repo.dart';
 import '../../features/home/domain/repo/product_repo.dart';
 import '../../features/home/presentation/cubits/category_cubit.dart';
 import '../../features/home/presentation/cubits/product_cubit.dart';
+import '../../features/home/presentation/screen/category_screen.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 import '../../features/home/presentation/screen/product_detail_screen.dart';
 import '../../features/splash/persentation/screen/splash_screen.dart';
@@ -106,6 +108,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) =>
             ProductDetailScreen(product: settings.arguments as ProductEntity),
+      );
+  case CategoryScreen.routeName:
+      return MaterialPageRoute(
+        builder: (_) =>
+            CategoryScreen(category: settings.arguments as CategoryEntity),
       );
 
     default:
