@@ -3,6 +3,7 @@ import 'package:e_commerce/core/utils/app_text_style.dart';
 import 'package:e_commerce/features/home/presentation/cubits/product_cubit.dart';
 import 'package:e_commerce/features/home/presentation/screen/product_detail_screen.dart';
 import 'package:e_commerce/features/home/presentation/screen/widgets/brand_item.dart';
+import 'package:e_commerce/features/home/presentation/screen/widgets/custom_drawer.dart';
 import 'package:e_commerce/features/home/presentation/screen/widgets/product_item.dart';
 import 'package:e_commerce/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawer(),
       bottomNavigationBar: BottomNavBar(),
       body: SafeArea(
         child: CustomScrollView(
@@ -65,8 +67,7 @@ class BrandBlocBuild extends StatelessWidget {
       builder: (context, state) {
         if (state is CategoryLoading) {
           return const SliverFillRemaining(
-            child: SizedBox(
-                child: Center(child: CircularProgressIndicator())),
+            child: SizedBox(child: Center(child: CircularProgressIndicator())),
           );
         } else if (state is CategoryFailure) {
           return SliverFillRemaining(
@@ -163,18 +164,19 @@ class HomeSliverAppBar extends StatelessWidget {
       floating: true,
       pinned: true,
       snap: true,
-
       leading: Center(
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0),
-          child: CircleAvatar(
-            radius: 23,
-            backgroundColor: AppColors.greyFAColor,
-            child: SvgPicture.asset(Assets.imagesMenu),
+          child: GestureDetector(
+            onTap: () => Scaffold.of(context).openDrawer(),
+            child: CircleAvatar(
+              radius: 23,
+              backgroundColor: AppColors.greyFAColor,
+              child: SvgPicture.asset(Assets.imagesMenu),
+            ),
           ),
         ),
       ),
-
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
@@ -193,7 +195,6 @@ class HomeSliverAppBar extends StatelessWidget {
       ],
 
       backgroundColor: Colors.transparent,
-
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(72),
         child: Padding(

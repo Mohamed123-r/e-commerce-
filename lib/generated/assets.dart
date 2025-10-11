@@ -13,10 +13,15 @@ class Assets {
   static const String imagesForgotPasswordImage = 'assets/images/forgot_password_image.png';
   static const String imagesHeart = 'assets/images/heart.svg';
   static const String imagesHome = 'assets/images/home.svg';
+  static const String imagesInfoCircle = 'assets/images/InfoCircle.svg';
+  static const String imagesLock = 'assets/images/Lock.svg';
   static const String imagesLogo = 'assets/images/Logo.png';
+  static const String imagesLogout = 'assets/images/Logout.svg';
   static const String imagesMenu = 'assets/images/menu.svg';
   static const String imagesSearch = 'assets/images/Search.svg';
+  static const String imagesSetting = 'assets/images/Setting.svg';
   static const String imagesStartBackground = 'assets/images/start_background.png';
+  static const String imagesSun = 'assets/images/sun.svg';
   static const String imagesTest1 = 'assets/images/test1.png';
   static const String imagesTest2 = 'assets/images/test2.png';
   static const String imagesVoice = 'assets/images/Voice.svg';
